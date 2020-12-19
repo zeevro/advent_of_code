@@ -1140,14 +1140,18 @@ def is_valid_2(passport):
     return True
 
 
-valid = 0
-curr = {}
+def count_valids(validator):
+    ret = 0
+    curr = {}
 
-for line in batch.splitlines():
-    curr.update(dict(v.split(':') for v in line.split()))
+    for line in batch.splitlines():
+        curr.update(dict(v.split(':') for v in line.split()))
 
-    if not line:
-        valid += is_valid_2(curr)
-        curr = {}
+        if not line:
+            ret += validator(curr)
+            curr = {}
 
-print(valid)
+    return ret
+
+print(count_valids(is_valid_1))
+print(count_valids(is_valid_2))
