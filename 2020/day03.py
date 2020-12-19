@@ -1,5 +1,6 @@
 from functools import reduce
 from itertools import starmap
+from operator import mul
 
 l = [
     '.#....#..##.#..####....#.......',
@@ -343,4 +344,4 @@ def count_trees(slope_x, slope_y):
 
 print(count_trees(3, 1))
 
-print(reduce(int.__mul__, starmap(count_trees, [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)])))
+print(reduce(mul, starmap(count_trees, [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)])))
