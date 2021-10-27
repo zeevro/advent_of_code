@@ -1,5 +1,5 @@
 from copy import deepcopy
-from itertools import product
+from itertools import product, count
 
 seats = '''LLLLL.LLLLLLLLL.LLLLLLLLLL.LLLLLLL.LLLLLLLLLLLLLLLLL.LLLLLLLLL.LLLLLL.LLLLLLL.LLLLLLLLLLLLLLLLLLLL
 LLLLL.LL.L.LLLL.LLL..LLLLL.LLLLLLLLLLLLLLLLLLLLLLLLL.LLLLLLLLL.LLLLLL.LLLLLLL.LLLLLLL.LLLLLLLLLLLL
@@ -124,10 +124,7 @@ def count_occupied_2(state, cx, cy):
     directions = list(product(*[[-1, 0, 1]] * 2))
     directions.remove((0, 0))
     for dx, dy in directions:
-        x, y = cx, cy
-        while 1:
-            x += dx
-            y += dy
+        for x, y in zip(count(cx + dx, dx), count(cy + dy, dy)):
             if x < 0 or x >= width or y < 0 or y >= height:
                 break
             c = state[y][x]
